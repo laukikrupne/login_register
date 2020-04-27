@@ -27,10 +27,10 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 # create database if not exists
-if not database_exists(url):
-    create_database(url)
+#if not database_exists(url):
+#    create_database(url)
 
-db.create_all()
+#db.create_all()
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
