@@ -30,6 +30,8 @@ login_manager.login_view = 'login'
 if not database_exists(url):
     create_database(url)
 
+db.create_all()
+
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), unique=True)
@@ -98,5 +100,4 @@ def logout():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    db.create_all()
-    app.run(host="0.0.0.0",port=5000,debug=True)
+    app.run(host="0.0.0.0",port=5000,debug=False)
