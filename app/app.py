@@ -1,21 +1,34 @@
+import os
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField
 from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
+from sqlalchemy_utils import create_database, database_exists
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
+url = 'mysql+pymysql://{}:{}@{}/{}'.format(
+    os.getenv('DB_USER', 'flask'),
+    os.getenv('DB_PASSWORD', ''),
+    os.getenv('DB_HOST', 'mysql'),
+    os.getenv('DB_NAME', 'flask')
+)
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:''@localhost/userdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 bootstrap = Bootstrap(app)
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+# create database if not exists
+if not database_exists(url):
+    create_database(url)
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -86,4 +99,4 @@ def logout():
 
 if __name__ == '__main__':
     db.create_all()
-    app.run(debug=True)
+    app.run(host="0.0.0.0",port=5000,debug=True)
