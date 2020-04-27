@@ -1,1 +1,1 @@
-CREATE DATABASE insta_db;
+CREATE DATABASE userdb;

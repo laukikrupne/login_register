@@ -1,4 +1,4 @@
-version: '3'
+version: ls'3'
 
 services:    
     app:
@@ -13,6 +13,4 @@ services:
             - "3306:3306"
         environment: 
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_USER: insta_admin
-            MYSQL_PASSWORD: insta2018
-            MYSQL_DATABASE: insta_db
+            MYSQL_DATABASE: userdb

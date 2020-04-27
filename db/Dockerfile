@@ -1,2 +1,2 @@
-FROM mysql:5.7
-ENV MYSQL_DATABASE insta_db
+FROM mysql:latest
+ENV MYSQL_DATABASE userdb
