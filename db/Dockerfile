@@ -1,2 +1,1 @@
-FROM mysql:latest
-ENV MYSQL_DATABASE userdb
+FROM mysql:5.7
