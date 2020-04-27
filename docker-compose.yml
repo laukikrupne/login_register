@@ -1,15 +1,18 @@
 version:'3'
 
-services: 
-    db :
-        image: mysql:latest
-        ports:
-            - "3306:3306"
-        environment: 
-            MYSQL_ROOT_PASSWORD: root   
+services:    
     app:
         build: ./app
         links:
             - db
         ports:
             - "5000:5000"
+    db :
+        build: ./db
+        ports:
+            - "3306:3306"
+        environment: 
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: insta_admin
+            MYSQL_PASSWORD: insta2018
+            MYSQL_DATABASE: userdb
