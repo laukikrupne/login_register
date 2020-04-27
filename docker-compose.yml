@@ -2,56 +2,16 @@ version: '3'
 
 services:    
     app:
-        build: ./app
-        container_name: flask_app
-        restart: unless-stopped
-        labels:
-            project: "flask"
-            day: "20 Apr 2020"
-        environment:
-            DB_HOST: mysql
-            DB_NAME: flask
-            DB_USER: flask
-            DB_PASSWORD: slimdingo85
-        volumes:
-            - ./app:/app
+        build: app/.
+        ports:
+            - "80:80"
         links:
-            - mysql
+            - db
         depends_on:
-            - mysql
-        ports:
-            - "5000:5000"
-        
-    mysql:
-        container_name: flask_mysql
-        image: mysql:5.7
+            - db
+    db:    
+        build: db/.
         volumes:
-            - mysql-data:/var/lib/mysql
-        restart: unless-stopped
-        labels:
-            project: "flask"
-            day: "20 Apr 2020"
+            - /var/lib/mysql
         environment:
-            MYSQL_ROOT_PASSWORD: slimdingo85
-            MYSQL_DATABASE: flask
-            MYSQL_USER: flask
-            MYSQL_PASSWORD: slimdingo85
-    phpmyadmin:
-        depends_on:
-            - mysql
-        image: phpmyadmin/phpmyadmin:latest
-        container_name: flask_phpmyadmin
-        restart: unless-stopped
-        labels:
-            project: "flask"
-            day: "20 Apr 2020"
-        ports:
-        - "5010:80"
-        environment:
-            PMA_HOST: mysql
-            PMA_USER: flask
-            PMA_PASSWORD: slimdingo85
-            MYSQL_ROOT_PASSWORD: slimdingo85
-volumes:
-    mysql-data:
-        driver: local
+        MYSQL_ROOT_PASSWORD: supersecure

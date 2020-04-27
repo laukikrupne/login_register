@@ -9,12 +9,14 @@ from sqlalchemy_utils import create_database, database_exists
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-url = 'mysql+pymysql://{}:{}@{}/{}'.format(
+url = 'mysql+pymysql://root:supersecure@db/information_schema'
+
+""".format(
     os.getenv('DB_USER', 'flask'),
     os.getenv('DB_PASSWORD', ''),
     os.getenv('DB_HOST', 'mysql'),
     os.getenv('DB_NAME', 'flask')
-)
+)"""
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -100,4 +102,4 @@ def logout():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0",port=5000,debug=False)
+    app.run(host="0.0.0.0",port=80,debug=False)
