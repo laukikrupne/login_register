@@ -14,4 +14,4 @@ services:
         volumes:
             - /var/lib/mysql
         environment:
-        MYSQL_ROOT_PASSWORD: supersecure
+            MYSQL_ROOT_PASSWORD: supersecure
