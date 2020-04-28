@@ -1,4 +1,3 @@
-import os
 from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
@@ -9,7 +8,7 @@ from sqlalchemy_utils import create_database, database_exists
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-url = 'mysql+pymysql://root:''@localhost/userdb'
+url = 'mysql+pymysql://root:laukik@127.0.0.1/userdb'
 
 """.format(
     os.getenv('DB_USER', 'flask'),
@@ -84,7 +83,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        return '<h1>New user has been created!</h1>'
+        return '<h1>New user has been created!</h1><br /><a href='+url_for('login')+'>Login</a>'
         #return '<h1>' + form.username.data + ' ' + form.email.data + ' ' + form.password.data + '</h1>'
 
     return render_template('signup.html', form=form)
