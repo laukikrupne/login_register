@@ -9,20 +9,19 @@ services:
             day: "21 Apr 2020"
         restart: unless-stopped
         links:
-            - db
+            - mysql
         depends_on:
             - db
         ports:
             - "80:80"
-    db:
+    mysql:
         container_name: login_register_db
         image: mysql:latest
         volumes:
             - mysql-data:/var/lib/mysql
         labels:
             project: "login_register"
-            day: "21 Apr 2020" 
-        command: --default-authentication-plugin=mysql_native_password       
+            day: "21 Apr 2020"  
         restart: unless-stopped
         ports:
            - "3306:3306"
@@ -31,6 +30,24 @@ services:
             MYSQL_DATABASE: userdb
             MYSQL_USER: laukikrupne
             MYSQL_PASSWORD: LBR123
+    phpmyadmin:
+        depends_on:
+            - mysql
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: login_register_phpmyadmin
+        restart: unless-stopped
+        labels:
+            project: "login_register"
+            day: "21 Apr 2020"
+        ports:
+        - "80:80"
+        environment:
+            PMA_HOST: localhost
+            PMA_USER: laukikrupne
+            PMA_PASSWORD: LBR123
+            MYSQL_ROOT_PASSWORD: LBR123  
+            
+
 volumes:
   # just a persistance data
     mysql-data:
