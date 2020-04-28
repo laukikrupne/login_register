@@ -11,7 +11,7 @@ services:
         links:
             - mysql
         depends_on:
-            - db
+            - mysql
         ports:
             - "80:80"
     mysql:
