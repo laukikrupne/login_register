@@ -8,15 +8,17 @@ services:
             project: "login_register"
             day: "21 Apr 2020"
         restart: unless-stopped
-        ports:
-            - "80:80"
         links:
             - db
         depends_on:
             - db
+        ports:
+            - "80:80"
     db:
         container_name: login_register_db
         image: mysql:latest
+        volumes:
+            - mysql-data:/var/lib/mysql
         labels:
             project: "login_register"
             day: "21 Apr 2020" 
@@ -25,5 +27,11 @@ services:
         ports:
            - "3306:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: laukik
+            MYSQL_ROOT_PASSWORD: LBR123
             MYSQL_DATABASE: userdb
+            MYSQL_USER: laukikrupne
+            MYSQL_PASSWORD: LBR123
+volumes:
+  # just a persistance data
+    mysql-data:
+        driver: local

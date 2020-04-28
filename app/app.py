@@ -8,7 +8,7 @@ from sqlalchemy_utils import create_database, database_exists
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-url = 'mysql+pymysql://root:laukik@127.0.0.1/userdb'
+url = 'mysql+pymysql://laukikrupne:LBR123@localhost/userdb'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
