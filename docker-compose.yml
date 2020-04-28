@@ -13,7 +13,7 @@ services:
             DB_HOST: localhost
             DB_NAME: userdb
             DB_USER: laukikrupne
-            DB_PASSWORD: slimdingo85
+            DB_PASSWORD: LBR123
         links:
             - mysql
         depends_on:
@@ -29,8 +29,8 @@ services:
             project: "login_register"
             day: "21 Apr 2020"  
         restart: unless-stopped
-        #ports:
-        #   - "3306:3306"
+        ports:
+           - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: LBR123
             MYSQL_DATABASE: userdb
@@ -46,7 +46,7 @@ services:
             project: "login_register"
             day: "21 Apr 2020"
         ports:
-        - "80:80"
+            - "80:80"
         environment:
             PMA_HOST: localhost
             PMA_USER: laukikrupne
