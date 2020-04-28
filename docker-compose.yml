@@ -2,11 +2,12 @@ version: '3'
 
 services:    
     app:
+        container_name: login_register_app
         build: app/.
         labels:
             project: "login_register"
             day: "21 Apr 2020"
-        #restart: unless-stopped
+        restart: unless-stopped
         ports:
             - "80:80"
         links:
@@ -14,11 +15,13 @@ services:
         depends_on:
             - db
     db:
+        container_name: login_register_db
         image: mysql:latest
         labels:
             project: "login_register"
-            day: "21 Apr 2020"        
-        #restart: unless-stopped
+            day: "21 Apr 2020" 
+        command: --default-authentication-plugin=mysql_native_password       
+        restart: unless-stopped
         ports:
            - "3306:3306"
         environment:
