@@ -14,7 +14,7 @@ services:
         depends_on:
             - db
     db:
-        build: db/.
+        image: mysql:latest
         labels:
             project: "login_register"
             day: "21 Apr 2020"        
