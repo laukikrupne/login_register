@@ -3,6 +3,10 @@ version: '3'
 services:    
     app:
         build: app/.
+        labels:
+            project: "login_register"
+            day: "21 Apr 2020"
+        #restart: unless-stopped
         ports:
             - "80:80"
         links:
@@ -10,11 +14,13 @@ services:
         depends_on:
             - db
     db:
-        image: mysql
-        command: --default-authentication-plugin=mysql_native_password
-        restart: always
+        build: db/.
+        labels:
+            project: "login_register"
+            day: "21 Apr 2020"        
+        #restart: unless-stopped
         ports:
            - "3306:3306"
         environment:
             MYSQL_ROOT_PASSWORD: laukik
-        
+            MYSQL_DATABASE: userdb

@@ -10,13 +10,6 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 
 url = 'mysql+pymysql://root:laukik@127.0.0.1/userdb'
 
-""".format(
-    os.getenv('DB_USER', 'flask'),
-    os.getenv('DB_PASSWORD', ''),
-    os.getenv('DB_HOST', 'mysql'),
-    os.getenv('DB_NAME', 'flask')
-)"""
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 app.config['SQLALCHEMY_DATABASE_URI'] = url
@@ -28,8 +21,8 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 # create database if not exists
-if not database_exists(url):
-    create_database(url)
+#if not database_exists(url):
+#    create_database(url)
 
 
 class User(UserMixin, db.Model):
