@@ -8,12 +8,12 @@ services:
             project: "login_register"
             day: "21 Apr 2020"
         restart: unless-stopped
-        environment:
+        '''environment:
             # set database, memcached etc credentials
             DB_HOST: localhost
             DB_NAME: userdb
             DB_USER: laukikrupne
-            DB_PASSWORD: LBR123
+            DB_PASSWORD: LBR123'''
         links:
             - mysql
         depends_on:
@@ -48,7 +48,7 @@ services:
         ports:
             - "80:80"
         environment:
-            PMA_HOST: localhost
+            PMA_HOST: 172.31.25.143
             PMA_USER: laukikrupne
             PMA_PASSWORD: LBR123
             MYSQL_ROOT_PASSWORD: LBR123  
