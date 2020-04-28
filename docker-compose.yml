@@ -8,12 +8,12 @@ services:
             project: "login_register"
             day: "21 Apr 2020"
         restart: unless-stopped
-        '''environment:
+        #environment:
             # set database, memcached etc credentials
-            DB_HOST: localhost
-            DB_NAME: userdb
-            DB_USER: laukikrupne
-            DB_PASSWORD: LBR123'''
+            #DB_HOST: localhost
+            #DB_NAME: userdb
+            #DB_USER: laukikrupne
+            #DB_PASSWORD: LBR123
         links:
             - mysql
         depends_on:
