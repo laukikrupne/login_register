@@ -9,7 +9,7 @@ from sqlalchemy_utils import create_database, database_exists
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-url = 'mysql+pymysql://root:supersecure@db/userdb'
+url = 'mysql+pymysql://root:''@localhost/userdb'
 
 """.format(
     os.getenv('DB_USER', 'flask'),
@@ -32,7 +32,6 @@ login_manager.login_view = 'login'
 if not database_exists(url):
     create_database(url)
 
-db.create_all()
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -102,4 +101,5 @@ def logout():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
+    db.create_all()
     app.run(host="0.0.0.0",port=80,debug=False)
