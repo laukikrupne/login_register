@@ -1,4 +1,4 @@
-FROM tnir/mysqlclient
+FROM mio101/py3-mysqlclient-alpine
 WORKDIR /usr/src/app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
