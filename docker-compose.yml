@@ -22,7 +22,8 @@ services:
             - "5000:5000"
     mysql:
         container_name: login_register_db
-        image: mysql:latest
+        image: mysql:5.7
+        build: mysql/.
         volumes:
             - mysql-data:/var/lib/mysql
         labels:
