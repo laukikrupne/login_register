@@ -2,18 +2,9 @@ version: '3'
 
 services:    
     app:
-        container_name: login_register_app
-        build: app/.
-        labels:
-            project: "login_register"
-            day: "21 Apr 2020"
+        container_name: app
+        build: 'app/.'
         restart: unless-stopped
-        #environment:
-            # set database, memcached etc credentials
-            #DB_HOST: localhost
-            #DB_NAME: userdb
-            #DB_USER: laukikrupne
-            #DB_PASSWORD: LBR123
         links:
             - mysql
         depends_on:
@@ -21,40 +12,28 @@ services:
         ports:
             - "5000:5000"
     mysql:
-        container_name: login_register_db
-        image: mysql:5.7
-        volumes:
-            - mysql-data:/var/lib/mysql
-        labels:
-            project: "login_register"
-            day: "21 Apr 2020"  
+        container_name: mysql
+        build: 'mysql/.'
+        restart: unless-stopped
+        #volumes:
+        #    - mysql-data:/var/lib/mysql
         restart: unless-stopped
         ports:
            - "3306:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: LBR123
-            MYSQL_DATABASE: userdb
-            MYSQL_USER: laukikrupne
-            MYSQL_PASSWORD: LBR123
+            MYSQL_ROOT_PASSWORD: root
     phpmyadmin:
+        container_name: phpmyadmin
+        build: 'phpmyadmin/.'
+        restart: unless-stopped
+        links:
+            - mysql
         depends_on:
             - mysql
-        image: phpmyadmin/phpmyadmin:latest
-        container_name: login_register_phpmyadmin
-        restart: unless-stopped
-        labels:
-            project: "login_register"
-            day: "21 Apr 2020"
         ports:
-            - "80:80"
-        environment:
-            PMA_HOST: 172.31.25.143
-            PMA_USER: laukikrupne
-            PMA_PASSWORD: LBR123
-            MYSQL_ROOT_PASSWORD: LBR123  
+            - "80:80"  
             
 
-volumes:
-  # just a persistance data
-    mysql-data:
-        driver: local
+#volumes:
+#    mysql-data:
+#        driver: local

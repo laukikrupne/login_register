@@ -8,7 +8,7 @@ from sqlalchemy_utils import create_database, database_exists
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 
-url = 'mysql+pymysql://laukikrupne:LBR123@172.31.25.143/userdb'
+url = 'mysql+pymysql://root:root@mysql/userdb'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -21,8 +21,8 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 # create database if not exists
-#if not database_exists(url):
-#    create_database(url)
+if not database_exists(url):
+    create_database(url)
 
 
 class User(UserMixin, db.Model):
