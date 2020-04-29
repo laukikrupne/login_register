@@ -32,6 +32,8 @@ services:
             - mysql
         ports:
             - "80:80"  
+        environment:
+            PMA_HOST: mysql
             
 
 #volumes:
